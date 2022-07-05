@@ -1,0 +1,16 @@
+apt update -y
+apt install wget -y
+wget https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz
+tar -zxvf helm-v3.9.0-linux-amd64.tar.gz
+linux-amd64/helm
+apt install git -y
+https://github.com/yahelron/rabbitmk-k8s-project
+cd rabbitmk-k8s-project/helm/rmq
+apt install curl -y
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+chmod +x kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
