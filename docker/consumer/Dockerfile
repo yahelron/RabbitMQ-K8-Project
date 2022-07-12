@@ -1,4 +1,4 @@
-FROM docker pull python:3.11-rc-buster
+FROM python
 ENV PYTHONPATH /usr/src/app
 WORKDIR /app
 ADD consumer.py /app
