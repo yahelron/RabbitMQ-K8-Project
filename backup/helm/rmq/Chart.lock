@@ -1,0 +1,6 @@
+dependencies:
+- name: producer
+  repository: file://../producer
+  version: 0.1.0
+digest: sha256:19377f73563082cb24ae9e8632ef3175ad2c93ed1f53a05c3206080758635682
+generated: "2022-06-27T18:11:41.290204+03:00"

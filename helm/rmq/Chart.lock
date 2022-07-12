@@ -2,5 +2,8 @@ dependencies:
 - name: producer
   repository: file://../producer
   version: 0.1.0
-digest: sha256:19377f73563082cb24ae9e8632ef3175ad2c93ed1f53a05c3206080758635682
-generated: "2022-06-27T18:11:41.290204+03:00"
+- name: rabbitmq
+  repository: https://charts.bitnami.com/bitnami
+  version: 10.1.13
+digest: sha256:2bd1d0c1c71aac1805e4b39c5d036b4a33bf91c86b0433618b631558284a05a8
+generated: "2022-07-09T15:46:33.3862638+03:00"

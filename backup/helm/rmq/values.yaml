@@ -14,15 +14,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-rabbitmq:
-  enabled: true
-  auth:
-    username: user
-    password: "Yahel123"
-  metrics:
-    enabled: true
-  fullnameOverride: "rabbitmq"
-
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
