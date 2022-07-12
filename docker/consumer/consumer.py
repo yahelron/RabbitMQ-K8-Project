@@ -18,7 +18,7 @@ def on_message_received(ch, method, properties, body):
 
 def consumer():
     credentials = pika.PlainCredentials('user', 'Yahel123')
-    connection_parameters = pika.ConnectionParameters('127.0.0.1',
+    connection_parameters = pika.ConnectionParameters('0.0.0.0',
                                                       5672,
                                                       '/',
                                                       credentials)
