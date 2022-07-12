@@ -8,11 +8,11 @@ image:
   repository: yahel567/producer
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "13"
+  tag: "14"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "producer"
 
 serviceAccount:
   # Specifies whether a service account should be created
