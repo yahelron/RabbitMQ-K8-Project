@@ -22,7 +22,7 @@ Implimentation will be used as the following:
 Upon Dockerfile, python or other relevant change [This Jenkins jenkins-docker-push pipeline ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/jenkins-docker-push.groovy) will be used to build new docker images and send them to the dockerhub repository.
 
 Jenkins setup for this configuration:
-make sure to add relevant creadentials in dockerhub (dedicated security password for the jenkins) and create jenkins credential (or global env variable) to store the passwrod in a secure manner 
+make sure to add relevant creadentials in dockerhub (dedicated security password for the jenkins) and create jenkins credential (or global env variable) to store the passwrod in a secure manner Docker login the support by jenkins will be something like this: echo ${password} | docker login -u ${username} --password-stdin
 
 # DC
 
