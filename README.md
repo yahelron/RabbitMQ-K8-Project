@@ -1,4 +1,4 @@
-# rabbitmk-k8s-project
+# rabbitmq-k8s-project
 
 [![Rabbit MQ](https://cdn.iconscout.com/icon/free/png-128/rabbitmq-282296.png)](hhttps://www.rabbitmq.com/)
 [![Helm](https://helm.sh/img/helm.svg)](https://helm.sh/)
