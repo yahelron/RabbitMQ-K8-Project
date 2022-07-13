@@ -7,11 +7,11 @@
 # About K8s RabbitMQ project
 
 The project infrastructure is based on a queueing mechanism implemented using RabbitMQ
-* 
 * RabbitMQ - an application that is able to store data in a queue fashion allowing us to
 have the ability to maintain a queue of messages
-
-
+* Peoducer pod will send messages to relevat rabbimq queue.
+* Consumer pod - will listen to new messages on a queue in RabbitMQ server
+[![rabbitmq project](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/rabbitmq1.jpg)](https://helm.sh/)
 
 # Install
 Implimentation will be used as the following:
