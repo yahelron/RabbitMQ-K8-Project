@@ -25,7 +25,8 @@ Jenkins setup for this configuration:
 make sure to add relevant creadentials in dockerhub (dedicated security password for the jenkins) and create jenkins credential (or global env variable) to store the passwrod in a secure manner Docker login the support by jenkins will be something like this: echo ${password} | docker login -u ${username} --password-stdin
 
 # DC
-Helm automatic implimentation via jenkins will be added soon.
+Helm chart will be installed with [This jenkins-helm-install.groovy pipeline ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/jenkins-helm-install.groovy). 
+note - when useing a pod to run helm you have to have the right permissions to run. [This rbac change file ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/rbac-admin.yaml) will give jenkins service acount admin permission to run the charts.
 
 # Producer
 Producer - will send messages every 20 seconds to a queue found in rabbitmq server.
