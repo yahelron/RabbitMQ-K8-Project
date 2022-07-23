@@ -1,7 +1,7 @@
 pipeline {
       agent { kubernetes { 
-            label 'test'
-            idleMinutes "5"
+            label 'local'
+
         }}
     stages {
         stage('install kube') {
@@ -14,6 +14,7 @@ pipeline {
                 chmod +x kubectl
                 ./kubectl get pod
                 curl -LO "https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz"
+                tar -zxvf helm-v3.9.0-linux-amd64.tar.gz
                 rm -rf rabbitmk-k8s-project/
                 '''
                 
@@ -24,7 +25,7 @@ pipeline {
                 sh '''
                 git clone https://github.com/yahelron/rabbitmk-k8s-project/
                 cd rabbitmk-k8s-project/helm/rmq 
-                ../../../linux-amd64/helm upgrade -i rmq ./
+                ../../../linux-amd64/helm upgrade -i --set image.tag=latest rmq ./
                 '''
             }
         }
