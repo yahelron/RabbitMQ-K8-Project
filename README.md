@@ -37,29 +37,35 @@ Consumer - will listen to new messages on a queue in RabbitMQ server and will pr
   kubectl expose pod [consumer pod name]  --type=ClusterIP --port=9422
   
   
-  Step by step configuration:
+ 
+ # Step by step configuration:
 
-# Prerequisites 
+
+Prerequisites 
 - Kubernetes system. you can use Minikube in your own computer.
 - kubectl to comunicate with kubernetes
 - helm in order to install this project and most of the mention components.
 
-# Jenkins
+Jenkins
 ```
 helm repo add jenkins https://charts.jenkins.io
 helm install myjenkins jenkins/jenkins
 kubectl exec --namespace default -it svc/myjenkins -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password
 kubectl --namespace default port-forward svc/myjenkins 8080:8080
+kubectl create -f jenkins/rbac-admin.yaml
+
+Acess to jenkins (http://127.0.0.1:8080) and and run the jenkins-docker-push.groovy and the jenkins-helm-install.groovy pipelines. 
 ```
 
-# Helm create producer, consumer and rabbitmq server.
+Helm create producer, consumer and rabbitmq server.
 ```
 git clone https://github.com/yahelron/rabbitmk-k8s-project
 cd helm/rmq/
 heml upgrade -i consumer ./
 ```
 
-# Monitoring
+
+Monitoring
 ```
 helm repo add grafana  https://grafana.github.io/helm-charts
 helm repo add  bitnami https://charts.bitnami.com/bitnami
@@ -69,4 +75,7 @@ helm install prometheus --namespace monitoring prometheus-community/prometheus
 kubectl apply -f monitoring/config.yml
 helm install -f monitoring/values.yml  --namespace monitoring  grafana grafana/grafana
 kubectl port-forward --namespace monitoring svc/grafana 3000:3000
+
+If you use port-forward  got to http://127.0.0.1:300 and add relevant dashboards to grafana.
 ```
+
