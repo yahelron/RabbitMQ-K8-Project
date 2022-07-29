@@ -9,28 +9,28 @@
 The project infrastructure is based on a queueing mechanism implemented using RabbitMQ
 * RabbitMQ - an application that is able to store data in a queue fashion allowing us to
 have the ability to maintain a queue of messages
-* Peoducer pod will send messages to relevat rabbimq queue.
+* Peoducer pod will send messages to relevant rabbimq queue.
 * Consumer pod - will listen to new messages on a queue in RabbitMQ server
 [![rabbitmq project](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/rabbitmq1.jpg)](https://helm.sh/)
 
 # Install
-Implimentation will be used as the following:
-* Heml will install all relevat compenets (producer, consumer and rabbitMQ).
+Implementation will be used as the following:
+* Heml will install all relevat components (producer, consumer and rabbitMQ).
 - Go to the following folder cd helm/rmq/ and run heml upgrade -i consumer ./
 
 # CI
 Upon Dockerfile, python or other relevant change [This Jenkins jenkins-docker-push pipeline ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/jenkins-docker-push.groovy) will be used to build new docker images and send them to the dockerhub repository.
 
 Jenkins setup for this configuration:
-make sure to add relevant creadentials in dockerhub (dedicated security password for the jenkins) and create jenkins credential (or global env variable) to store the passwrod in a secure manner Docker login the support by jenkins will be something like this: echo ${password} | docker login -u ${username} --password-stdin
+Make sure to add relevant credentials in dockerhub (dedicated security password for the jenkins) and create jenkins credential (or global env variable) to store the password in a secure manner Docker login the support by jenkins will be something like this: echo ${password} | docker login -u ${username} --password-stdin
 
 # DC
 Helm chart will be installed with [This jenkins-helm-install.groovy pipeline ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/jenkins-helm-install.groovy). 
-note - when useing a pod to run helm you have to have the right permissions to run. [This rbac change file ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/rbac-admin.yaml) will give jenkins service acount admin permission to run the charts.
+note - when using a pod to run helm you have to have the right permissions to run. [This rbac change file ](https://github.com/yahelron/rabbitmk-k8s-project/blob/main/Jenkins/rbac-admin.yaml) will give jenkins service acount admin permission to run the charts.
 
 # Producer
 Producer - will send messages every 20 seconds to a queue found in rabbitmq server.
-# Comsumer
+# Consumer
 Consumer - will listen to new messages on a queue in RabbitMQ server and will print them to STDOUT.
 * There are two consumers you can use. old consumer works with python 2. whereas the new consumer work with python3 and run [prometheus](https://prometheus.io/docs/introduction/overview/) metrics.
 * in order to expose the metrics to k8s cluster please run following k8s command:
