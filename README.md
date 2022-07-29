@@ -35,3 +35,38 @@ Consumer - will listen to new messages on a queue in RabbitMQ server and will pr
 * There are two consumers you can use. old consumer works with python 2. whereas the new consumer work with python3 and run [prometheus](https://prometheus.io/docs/introduction/overview/) metrics.
 * in order to expose the metrics to k8s cluster please run following k8s command:
   kubectl expose pod [consumer pod name]  --type=ClusterIP --port=9422
+  
+  
+  Step by step configuration:
+
+# Prerequisites 
+- Kubernetes system. you can use Minikube in your own computer.
+- kubectl to comunicate with kubernetes
+- helm in order to install this project and most of the mention components.
+
+# Jenkins
+```
+helm repo add jenkins https://charts.jenkins.io
+helm install myjenkins jenkins/jenkins
+kubectl exec --namespace default -it svc/myjenkins -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password
+kubectl --namespace default port-forward svc/myjenkins 8080:8080
+```
+
+# Helm create producer, consumer and rabbitmq server.
+```
+git clone https://github.com/yahelron/rabbitmk-k8s-project
+cd helm/rmq/
+heml upgrade -i consumer ./
+```
+
+# Monitoring
+```
+helm repo add grafana  https://grafana.github.io/helm-charts
+helm repo add  bitnami https://charts.bitnami.com/bitnami
+helm repo update
+kubectl apply -f ./monitoring/namespace.yml 
+helm install prometheus --namespace monitoring prometheus-community/prometheus
+kubectl apply -f monitoring/config.yml
+helm install -f monitoring/values.yml  --namespace monitoring  grafana grafana/grafana
+kubectl port-forward --namespace monitoring svc/grafana 3000:3000
+```
